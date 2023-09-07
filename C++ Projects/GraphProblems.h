@@ -66,26 +66,25 @@ public:
     /// regular BFS
     // nodes numbered from 0 to adj.size() -1
     void bfs(vector<vector<int>>& adj){
-        unordered_set<int> visited;
-        queue<int> q;
-        q.push(0); // starting from cur 0
+    unordered_set<int> visited;
+    queue<int> q;
+    q.push(0); // starting from vertex 0
+    visited.insert(0); // mark 0 as visited
 
-        while(!q.empty()){
-            int cur = q.front();
-            q.pop();
-            // queue te ek jinish multiple times thakte pare but this checks ensure our BFS
-            // remains optimzied
-            if(visited.count(cur) != 1){ // not visited yet
-                visited.insert(cur); // mark as visited
-                cout << cur << " "; // do the work
-                for(int &n: adj[cur]){
-                    if(visited.count(n) != 1){ // not visited yet
-                        q.push(n);
-                    }
-                }
+    while(!q.empty()){
+        int cur = q.front();
+        q.pop();
+
+        cout << cur << " "; // do the work
+
+        for(int &n: adj[cur]){
+            if(visited.count(n) != 1){ // not visited yet
+                visited.insert(n); // mark as visited immediately
+                q.push(n);
             }
         }
     }
+}
 
 
     // num of componenets in a graph
